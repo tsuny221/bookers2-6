@@ -1,0 +1,37 @@
+<table class="table">
+		<tr><%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %></tr>
+
+		<tr>
+			<th>name</th>
+			<th><%= user.name %></th>
+		</tr>
+
+		<tr>
+			<th>introduction</th>
+			<th><%= user.introduction %></th>
+		</tr>
+		<% @user ||= current_user %>
+		<tr>
+  			<th>follows</th>
+  			<th><a href="<%= following_user_path(@user) %>">
+   			 <strong id="following" class="stat">
+     		 <%= user.following.count %>
+    		</strong></a>
+    		</th>
+    	</tr>
+ 	    <tr>
+ 	    	<th>followers</th>
+  			<th><a href="<%= followers_user_path(@user) %>">
+   			 <strong id="followers" class="stat">
+     		 <%= user.followers.count %>
+   			 </strong>
+ 			 </a></th>
+		</tr>
+</table>
+<%= render 'users/follow_form', user: @user %>
+
+<div class="row">
+<% if user.id == current_user.id %>
+	<%= link_to '',edit_user_path(user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
+<% end %>
+</div>
