@@ -1,0 +1,19 @@
+<% book.book_comments.each do |book_comment| %>
+<li class="comment row">
+<%= link_to (book_comment.user) do %>
+<%= attachment_image_tag(book_comment.user, :profile_image, :fill, 100, 100, fallback: "no-image-mini.jpg") %><br>
+<%= book_comment.user.name %>
+<% end %>
+<div class="comment-body">
+<p class="comment-txt">
+<%= book_comment.comment %>
+</p>
+<% if current_user == book_comment.user %>
+<p><%= link_to book_book_comments_path(book_comment.book, book_comment), method: :delete, remote: true, class: "btn-sm btn-danger destroy_book_#{book_comment}" do %>
+	Destroy
+	<% end %>
+	</p>
+	<% end %>
+</div>
+</li>
+<% end %>

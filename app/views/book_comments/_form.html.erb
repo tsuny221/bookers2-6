@@ -1,0 +1,18 @@
+<%= form_with(model: [book, book_comment], url: book_book_comments_path(book) ) do |f| %>
+<% if @book_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(book_comment.errors.count, "error") %> prohibited this book from being saved:</h2>
+      <ul>
+      <% book_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field row">
+    <%= f.text_area :comment, class: "col-xs-11 book_body" %>
+  </div>
+  <div class="actions row">
+    <%= f.submit "送信", class: "btn btn-primary col-xs-11" %>
+  </div>
+<% end %>
